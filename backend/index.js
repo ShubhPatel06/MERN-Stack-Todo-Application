@@ -8,6 +8,7 @@ import authRouter from "./routes/authRoutes.js";
 import { corsOptions } from "./config/corsOptions.js";
 import cookieParser from "cookie-parser";
 import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -16,6 +17,9 @@ const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use("/", express.static(path.join(__dirname, "public")));
 
