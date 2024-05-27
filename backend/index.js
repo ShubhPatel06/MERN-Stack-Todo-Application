@@ -7,6 +7,7 @@ import todoRouter from "./routes/todosRoutes.js";
 import authRouter from "./routes/authRoutes.js";
 import { corsOptions } from "./config/corsOptions.js";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 dotenv.config();
 
@@ -15,6 +16,8 @@ const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+
+app.use("/", express.static(path.join(__dirname, "public")));
 
 app.use("/", rootRouter);
 app.use("/api/auth", authRouter);
